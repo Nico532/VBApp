@@ -1,11 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
+import { Linking } from 'react-native';
+import { useState } from 'react';
+import Installation from './screens/Installation';
 
 export default function App() {
+  sendWhatsApp = (msg) => {
+    let url = "whatsapp://send?text=" + msg;
+    Linking.openURL(url)
+      .then(data => {
+        console.log("WhatsApp Opened");
+      })
+      .catch(() => {
+        alert("Stelle sicher, dass Whatsapp installiert ist");
+      });
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Installation sendFunc={sendWhatsApp}></Installation>
     </View>
   );
 }
@@ -13,8 +25,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    margin: 10,
   },
 });
