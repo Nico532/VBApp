@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
+import { StyleSheet, View, StatusBar } from 'react-native';
 import { Linking } from 'react-native';
 import { useState } from 'react';
 import Installation from './screens/Installation';
@@ -18,6 +18,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <StatusBar />
       <Installation sendFunc={sendWhatsApp}></Installation>
     </View>
   );

@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import CheckBox from 'expo-checkbox';
 import { COLORS } from '../global';
 
-const CheckInput = ({ name, onChange, text }) => {
+const CheckInput = ({ name, onCheck = () => void 0, onChange = () => void 0, text, noFunc = false }) => {
     const [checked, setChecked] = useState(false)
     const [nameFilled, setNameFilled] = useState(false)
     const [value, setValue] = useState("")
@@ -16,15 +16,15 @@ const CheckInput = ({ name, onChange, text }) => {
 
     return (
         <View style={{ flexDirection: "row", }}>
-            <View style={{ flexDirection: "column", flex: 1, rowGap: 7, paddingTop: 5 }}>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text style={styles.text}>{name}: </Text>
-                    <CheckBox color={"#525CEB"} style={{ height: 18, width: 18 }} onValueChange={() => {
+            <View style={{ flexDirection: "column", flex: 1, rowGap: 7, }}>
+                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: 'space-between', marginRight: 15 }}>
+                    <Text style={styles.headline}>{name}: </Text>
+                    <CheckBox color={"#525CEB"} style={{ height: 20, width: 20 }} onValueChange={() => {
                         setChecked(!checked)
-
+                        onCheck(!checked)
                     }} value={checked} />
                 </View>
-                {checked && (
+                {(checked && !noFunc) && (
                     <View style={{ flexDirection: "row", alignItems: "center", }}>
                         <Text style={styles.text}>{text}</Text>
                         <TextInput
@@ -55,7 +55,11 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 15,
-        color: COLORS.text
+        color: COLORS.text,
+    },
+    headline: {
+        fontWeight: "bold",
+        fontSize: 17,
     }
 });
 

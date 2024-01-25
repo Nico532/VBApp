@@ -4,12 +4,9 @@ import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { COLORS } from '../global';
 
-const data = [
-    { label: '5x4mm', value: '5x4mm' },
-    { label: '5x6mm', value: '5x6mm' },
-];
 
-const WBDropdown = ({ onSelect }) => {
+
+const WBDropdown = ({ onSelect, data, pHolder }) => {
     const [value, setValue] = useState(null);
 
     const renderItem = item => {
@@ -39,7 +36,7 @@ const WBDropdown = ({ onSelect }) => {
                 maxHeight={120}
                 labelField="label"
                 valueField="value"
-                placeholder="Länge Leitungsweg"
+                placeholder={pHolder}
                 value={value}
                 onChange={item => {
                     setValue(item.value);
