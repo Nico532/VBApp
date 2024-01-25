@@ -33,7 +33,7 @@ const WBDropdown = ({ onSelect, data, pHolder }) => {
                 selectedTextStyle={styles.selectedTextStyle}
                 inputSearchStyle={styles.inputSearchStyle}
                 data={data}
-                maxHeight={120}
+                maxHeight={300}
                 labelField="label"
                 valueField="value"
                 placeholder={pHolder}
@@ -52,13 +52,12 @@ export default WBDropdown;
 
 const styles = StyleSheet.create({
     dropdown: {
-        marginTop: 7,
-        flex: 1,
         height: 30,
         backgroundColor: COLORS.inputBackground,
         borderRadius: 5,
         padding: 8,
         shadowColor: '#000',
+        flex: 1,
         shadowOffset: {
             width: 0,
             height: 1,

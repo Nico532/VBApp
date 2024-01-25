@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import CheckBox from 'expo-checkbox';
 import { COLORS } from '../global';
 
-const CheckInput = ({ name, onCheck = () => void 0, onChange = () => void 0, text, noFunc = false }) => {
+const CheckInput = ({ name, onCheck = () => void 0, onChange = () => void 0, text, noFunc = false, pHolder = name, numericInput = false }) => {
     const [checked, setChecked] = useState(false)
     const [nameFilled, setNameFilled] = useState(false)
     const [value, setValue] = useState("")
@@ -28,8 +28,9 @@ const CheckInput = ({ name, onCheck = () => void 0, onChange = () => void 0, tex
                     <View style={{ flexDirection: "row", alignItems: "center", }}>
                         <Text style={styles.text}>{text}</Text>
                         <TextInput
+                            keyboardType={numericInput ? "numeric" : "default"}
                             style={styles.input}
-                            placeholder={name}
+                            placeholder={pHolder}
                             value={value}
                             onChangeText={(value) => {
                                 setValue(value);
@@ -51,7 +52,17 @@ const styles = StyleSheet.create({
         paddingLeft: 7,
         fontSize: 15,
         borderRadius: 5,
-        color: COLORS.text
+        color: COLORS.text,
+
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 1.41,
+
+        elevation: 2,
     },
     text: {
         fontSize: 15,

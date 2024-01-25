@@ -25,6 +25,21 @@ const Installation = ({ sendFunc }) => {
     const [kleinverteiler, setKleinverteiler] = useState(false)
     const [kleinverteilerSelected, setKleinverteilerSelected] = useState(null)
 
+    const [hauptzuleitung, setHauptzuleitung] = useState("")
+
+    const stringanzahlData = [
+        { label: "Länge Erde", value: "Länge Erde" },
+        { label: "Länge 1", value: "Länge 1" },
+        { label: "Länge 2", value: "Länge 2" },
+        { label: "Länge 3", value: "Länge 3" }
+    ]
+
+    const [stringanzahl, setStringanzahl] = useState(null)
+
+    const [devolo, setDevolo] = useState(false)
+
+    const [ueberspannungsschutz, setUeberspannungsschutz] = useState("")
+
     const constructMsg = () => {
         msg = ""
         msg += "Wallbox: "
@@ -45,11 +60,13 @@ const Installation = ({ sendFunc }) => {
         <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.rowContainer}>
-                <CheckInput name={"Wallbox"} onChange={setWallbox} text={"Fabrikat: "}></CheckInput>
-                {wallbox !== "" &&
-                    <View>
-                        <WBDropdown data={wallboxData} pHolder={"Länge Leitungsweg"} onSelect={setWallboxSelected}></WBDropdown>
-                    </View>}
+                <View style={{ width: "100%", rowGap: 5 }}>
+                    <CheckInput name={"Wallbox"} onChange={setWallbox} text={"Fabrikat: "}></CheckInput>
+                    {wallbox !== "" &&
+                        <View>
+                            <WBDropdown data={wallboxData} pHolder={"Länge Leitungsweg"} onSelect={setWallboxSelected}></WBDropdown>
+                        </View>}
+                </View>
             </View>
             <View style={styles.divider}></View>
             <View style={styles.rowContainer}>
@@ -59,9 +76,26 @@ const Installation = ({ sendFunc }) => {
             <View style={styles.rowContainer}>
                 <CheckInput name="Kleinverteiler" onCheck={setKleinverteiler} noFunc={true}></CheckInput>
                 {kleinverteiler === true &&
-                    <View>
+                    <View style={{ marginTop: 5 }}>
                         <WBDropdown data={kleinverteilerData} pHolder={"Anzahl Reihen"} onSelect={setKleinverteilerSelected}></WBDropdown>
                     </View>}
+            </View>
+            <View style={styles.divider}></View>
+            <View style={styles.rowContainer}>
+                <CheckInput name="Hauptzuleitung" onCheck={setHauptzuleitung} pHolder={"Länge (in m)"} numericInput={true}></CheckInput>
+            </View>
+            <View style={styles.divider}></View>
+            <View style={{ flexDirection: "column", rowGap: 4, width: "100%" }}>
+                <Text style={styles.headline}>Stringanzahl: </Text>
+                <WBDropdown data={stringanzahlData} pHolder={"Länge"} onSelect={setStringanzahl}></WBDropdown>
+            </View>
+            <View style={styles.divider}></View>
+            <View style={styles.rowContainer}>
+                <CheckInput name="Devolo" onCheck={setDevolo} noFunc={true}></CheckInput>
+            </View>
+            <View style={styles.divider}></View>
+            <View style={styles.rowContainer}>
+                <CheckInput name="Überspannungsschutz" onCheck={setUeberspannungsschutz} pHolder={"DC / AC"} ></CheckInput>
             </View>
             <TouchableOpacity style={styles.button} onPress={() => {
                 msg = constructMsg();
@@ -74,7 +108,7 @@ const Installation = ({ sendFunc }) => {
 
 const styles = StyleSheet.create({
     container: {
-        rowGap: 10,
+        rowGap: 8,
         flex: 1,
         alignItems: 'center',
         marginTop: 50,
@@ -96,6 +130,10 @@ const styles = StyleSheet.create({
     text: {
         color: COLORS.background,
         fontSize: 15,
+    },
+    headline: {
+        fontWeight: "bold",
+        fontSize: 17,
     }
 })
 
