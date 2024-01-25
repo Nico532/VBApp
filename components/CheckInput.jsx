@@ -1,21 +1,31 @@
 // CheckInput.js
 import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CheckBox from 'expo-checkbox';
+import { COLORS } from '../global';
 
 const CheckInput = ({ name, onChange, text }) => {
     const [checked, setChecked] = useState(false)
     const [nameFilled, setNameFilled] = useState(false)
     const [value, setValue] = useState("")
 
+    useEffect(() => {
+        checked === false && onChange(""); setValue("")
+    }, [checked])
+
     return (
-        <View style={{ flexDirection: "row" }}>
-            <View style={{ flexDirection: "row", height: 40, flex: 1, alignItems: "center", columnGap: 5, borderBottomWidth: 1, paddingBottom: 10, paddingTop: 5 }}>
-                <Text style={styles.text}>{name}: </Text>
-                <CheckBox color={"#1c8eff"} style={{ height: 19, width: 19 }} onValueChange={setChecked} value={checked} />
+        <View style={{ flexDirection: "row", }}>
+            <View style={{ flexDirection: "column", flex: 1, rowGap: 7, paddingTop: 5 }}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Text style={styles.text}>{name}: </Text>
+                    <CheckBox color={"#525CEB"} style={{ height: 18, width: 18 }} onValueChange={() => {
+                        setChecked(!checked)
+
+                    }} value={checked} />
+                </View>
                 {checked && (
-                    <View style={{ flexDirection: "row", flex: 1 }}>
+                    <View style={{ flexDirection: "row", alignItems: "center", }}>
                         <Text style={styles.text}>{text}</Text>
                         <TextInput
                             style={styles.input}
@@ -30,18 +40,22 @@ const CheckInput = ({ name, onChange, text }) => {
                     </View>
                 )}
             </View>
-        </View>
+        </View >
     );
 };
 
 const styles = StyleSheet.create({
     input: {
-        backgroundColor: "lightgrey",
+        backgroundColor: COLORS.inputBackground,
         flex: 1,
         paddingLeft: 7,
+        fontSize: 15,
+        borderRadius: 5,
+        color: COLORS.text
     },
     text: {
-        fontSize: 17,
+        fontSize: 15,
+        color: COLORS.text
     }
 });
 

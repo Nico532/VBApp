@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
 import { Linking } from 'react-native';
 import { useState } from 'react';
 import Installation from './screens/Installation';
+import { COLORS } from './global';
 
 export default function App() {
   sendWhatsApp = (msg) => {
@@ -25,6 +26,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 10,
+    borderWidth: 1,
+    backgroundColor: COLORS.background
   },
 });
