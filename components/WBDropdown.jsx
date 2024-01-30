@@ -52,7 +52,7 @@ export default WBDropdown;
 
 const styles = StyleSheet.create({
     dropdown: {
-        height: 30,
+        height: 33,
         backgroundColor: COLORS.inputBackground,
         borderRadius: 5,
         padding: 8,

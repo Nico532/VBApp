@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import CheckBox from 'expo-checkbox';
 import { COLORS } from '../global';
 
-const CheckInput = ({ name, onCheck = () => void 0, onChange = () => void 0, text, noFunc = false, pHolder = name, numericInput = false }) => {
+const CheckInput = ({ name, onCheck = () => void 0, onChange = () => void 0, text, noFunc = false, pHolder = "", numericInput = false, multiline = false }) => {
     const [checked, setChecked] = useState(false)
     const [nameFilled, setNameFilled] = useState(false)
     const [value, setValue] = useState("")
@@ -19,7 +19,7 @@ const CheckInput = ({ name, onCheck = () => void 0, onChange = () => void 0, tex
             <View style={{ flexDirection: "column", flex: 1, rowGap: 7, }}>
                 <View style={{ flexDirection: "row", alignItems: "center", justifyContent: 'space-between', marginRight: 15 }}>
                     <Text style={styles.headline}>{name}: </Text>
-                    <CheckBox color={"#525CEB"} style={{ height: 20, width: 20 }} onValueChange={() => {
+                    <CheckBox color={"#525CEB"} style={{ height: 22, width: 22 }} onValueChange={() => {
                         setChecked(!checked)
                         onCheck(!checked)
                     }} value={checked} />
@@ -37,6 +37,7 @@ const CheckInput = ({ name, onCheck = () => void 0, onChange = () => void 0, tex
                                 onChange(value);
                                 setNameFilled(true);
                             }}
+                            multiline={multiline}
                         />
                     </View>
                 )}
@@ -50,6 +51,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.inputBackground,
         flex: 1,
         paddingLeft: 7,
+        minHeight: 33,
         fontSize: 15,
         borderRadius: 5,
         color: COLORS.text,
